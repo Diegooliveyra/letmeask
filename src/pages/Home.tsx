@@ -5,8 +5,8 @@ import logoIconGoogle from '../assets/images/google-icon.svg';
 import { useHistory } from 'react-router';
 
 import { Button } from '../components/Button/Button';
-import '../styles/auth.scss';
 import { useAuth } from '../hooks/useAuth';
+import '../styles/auth.scss';
 
 export function Home() {
   const history = useHistory();
