@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
 import illustrationImg from '../assets/images/illustration.svg';
 import logoImg from '../assets/images/logo.svg';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { Button } from '../components/Button/Button';
 import { useAuth } from '../hooks/useAuth';
@@ -12,6 +12,7 @@ import '../styles/auth.scss';
 export function NewRoom() {
   const { user } = useAuth();
   const [newRoom, setNewRoom] = useState('');
+  const history = useHistory();
 
   async function handleCreateRomm(event: FormEvent) {
     event.preventDefault();
@@ -24,6 +25,8 @@ export function NewRoom() {
       title: newRoom,
       authorId: user?.id,
     });
+    // muda para rota /rooms/key da sala, essa key é gerada pelo firebase
+    history.push(`/rooms/${firebaseRomm.key}`);
   }
 
   return (
