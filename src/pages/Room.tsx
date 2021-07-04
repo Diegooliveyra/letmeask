@@ -10,6 +10,8 @@ import '../styles/room.scss';
 import { database } from '../services/firebase';
 import { useEffect } from 'react';
 
+import { Question } from '../components/Question/Question';
+
 type RoomParams = {
   id: string;
 };
@@ -27,7 +29,7 @@ type FirebaseQuestions = Record<
   }
 >;
 
-type Question = {
+type QuestionType = {
   id: string;
   author: {
     name: string;
@@ -42,7 +44,7 @@ export function Room() {
   const { user } = useAuth();
   const params = useParams<RoomParams>();
   const [newQuestion, setNewQuestion] = useState('');
-  const [question, setQuestion] = useState<Question[]>([]);
+  const [questions, setQuestion] = useState<QuestionType[]>([]);
   const [title, setTitle] = useState('');
 
   const roomId = params.id;
@@ -67,7 +69,7 @@ export function Room() {
       setTitle(databaseRoom.title);
       setQuestion(parsedQuestions);
     });
-  }, []);
+  }, [roomId]);
 
   async function handleSendQuestiom(event: FormEvent) {
     event.preventDefault();
@@ -104,9 +106,9 @@ export function Room() {
       <section className="main">
         <div className="room-title">
           <h1>Sala {title}</h1>
-          {question.length > 0 && (
+          {questions.length > 0 && (
             <span>
-              {question.length} pergunta{question.length > 1 ? 's' : ''}
+              {questions.length} pergunta{questions.length > 1 ? 's' : ''}
             </span>
           )}
         </div>
@@ -132,7 +134,17 @@ export function Room() {
             <Button type="submit">Enviar Pergunta </Button>
           </div>
         </form>
-        {JSON.stringify(question)}
+        <div className="question-list">
+          {questions.map((question) => {
+            return (
+              <Question
+                key={question.id}
+                content={question.content}
+                author={question.author}
+              />
+            );
+          })}
+        </div>
       </section>
     </div>
   );
