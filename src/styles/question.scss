@@ -17,22 +17,49 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 24px;
-  }
 
-  .user-info {
-    display: flex;
-    align-items: center;
+    .user-info {
+      display: flex;
+      align-items: center;
 
-    img {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
+      img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+      }
+
+      p {
+        display: inline-block;
+        margin-left: 8px;
+        color: #737380;
+      }
     }
 
-    p {
-      display: inline-block;
-      margin-left: 8px;
-      color: #737380;
+    button {
+      margin: 0;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      transition: filter 0.2s;
+
+      &.like-button {
+        display: flex;
+        align-items: flex-end;
+        color: #737380;
+        gap: 8px;
+
+        &.liked {
+          color: #835afd;
+
+          svg path {
+            stroke: #835afd;
+          }
+        }
+      }
+
+      &:hover {
+        filter: brightness(0.7);
+      }
     }
   }
 }
