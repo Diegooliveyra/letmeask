@@ -8,10 +8,22 @@
     margin-top: 8px;
   }
 
+  &.highLight {
+    background: #f4f8ff;
+    border: 1px solid #835afd;
+
+    footer .user-info p {
+      color: #29292e;
+    }
+  }
+
   p {
     color: #29292e;
   }
 
+  &.answered {
+    background: #d8dcdd;
+  }
   footer {
     display: flex;
     justify-content: space-between;
@@ -33,6 +45,11 @@
         margin-left: 8px;
         color: #737380;
       }
+    }
+
+    > div {
+      display: flex;
+      gap: 16px;
     }
 
     button {
